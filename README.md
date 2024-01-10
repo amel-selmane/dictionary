@@ -6,8 +6,8 @@
 
 ## Technologies used
 
-* Vite
-* React
+* Vite.js
+* React.js
 * Typescript
 * TailwindCSS
 * Vitest
