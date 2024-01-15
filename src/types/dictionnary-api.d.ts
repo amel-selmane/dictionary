@@ -1,27 +1,33 @@
-export type Meaning = {
-    antonyms: string[];
-    definitions: Definition[];
-    partOfSpeech: string;
-    synonyms: string[];
+type License = {
+  name: string;
+  url: string;
 };
 
-export type Phonetics = {
-    audio: string,
-    license: object,
-    sourceUrl: string,
-    text?: string
-}
+type Phonetic = {
+  audio: string;
+  license: License;
+  sourceUrl: string;
+  text?: string;
+};
 
 export type Definition = {
-    definition: string;
-    antonyms: string[];
-    synonyms: string[];
+  definition: string;
+  antonyms: string[];
+  synonyms: string[];
+  example?: string;
+};
+
+export type Meaning = {
+  antonyms: string[];
+  definitions: Definition[];
+  partOfSpeech: string;
+  synonyms: string[];
 };
 
 export type DictionnaryAPIResponse = {
-    license: object;
-    meanings: Meaning[];
-    phonetics: object[];
-    sourceUrls: string[];
-    word: string;
+  license: License;
+  meanings: Meaning[];
+  phonetics: Phonetic[];
+  sourceUrls: string[];
+  word: string;
 };

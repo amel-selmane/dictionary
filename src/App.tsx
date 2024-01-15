@@ -1,51 +1,83 @@
-import { useEffect, useState, useRef, FormEvent } from "react";
-import { DictionnaryAPIResponse, Meaning } from "./types/dictionnary-api";
-import "./App.css";
+import { useState, FormEvent } from "react";
+import { DictionnaryAPIResponse, Meaning, Definition } from "./types/dictionnary-api";
 
-function App() {
-  const [data, setData] = useState<DictionnaryAPIResponse[] | null>(null);
-  const [errorData, setErrorData] = useState<string>('');
-  const meanings: Meaning[] = data && data[0].meanings;
+// IMPORT COMPONENTS
+import Typography from "./components/Typography";
+import DictionnarySearchForm from "./components/DictionnarySearchForm";
+import WordClass from "./components/WordClass";
 
-  const dictionnaryInput = useRef<HTMLInputElement>(null);
+// IMPORT LAYOUTS
+import Header from "./layouts/Header/Layout";
 
-  useEffect(() => {}, []);
+const App = () => {
+    const [data, setData] = useState<DictionnaryAPIResponse[] | null>(null);
+    const [error, setError] = useState<string>(null);
+    const meanings: Meaning[] = data && data[0].meanings;
 
-  const handleSubmit = (e: FormEvent): void => {
-    e.preventDefault();
+    const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
 
-    const dictionnaryInputValue = dictionnaryInput.current!.value;
-    const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${dictionnaryInputValue}`;
+        const dictionnaryInputValue = e.target[0].value;
+        const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${dictionnaryInputValue}`;
 
-    dictionnaryInputValue &&
-      fetch(url)
-        .then(response => {
-          if (response.ok === false) throw "This word doesn't exists";
-          return response.json();
-        })
-        .then(data => {
-          setData(data);
-          setErrorData(null);
-        })
-        .catch(e => {
-          setErrorData(e);
-          setData(null);
+        dictionnaryInputValue &&
+            fetch(url)
+                .then(response => {
+                    if (response.ok === false) throw "This word doesn't exists";
+                    return response.json();
+                })
+                .then(data => {
+                    setData(data);
+                    setError(null);
+                })
+                .catch(e => {
+                    setError(e);
+                    setData(null);
+                });
+    };
+
+    const generateMeanings = (meanings: Meaning[]) => {
+        return meanings?.map(({ partOfSpeech, definitions, synonyms }, i) => {
+            return (
+                <section key={i}>
+                    {/* <h2>{props.partOfSpeech}</h2> */}
+                    <WordClass class={partOfSpeech} />
+                    <p>Meaning</p>
+                    <ul>
+                        {definitions.map(({ definition }, j) => {
+                            return <li key={j}>{definition}</li>;
+                        })}
+                    </ul>
+                    <span>Synonyms&nbsp;&nbsp;</span>
+                    <span>{synonyms.map(synonym => synonym + ", ")}</span>
+                </section>
+            );
         });
-  };
+    };
 
-  return (
-    <>
-      <h1>{errorData?.toString()}</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Write your word" ref={dictionnaryInput} />
-        &nbsp;
-        <input type="submit" value="Search" />
-      </form>
-      <div>
-        {meanings?.map((meaning, i) => <h2 key={i}>{meaning.partOfSpeech}</h2>)}
-      </div>
-    </>
-  );
-}
+    const generateSourceURL = (data: DictionnaryAPIResponse[]) => {
+        return (
+            data && (
+                <>
+                    <hr />
+                    <span>Source : </span>
+                    {data.map(({ sourceUrls }, i: number) => (
+                        <span key={i}>{sourceUrls}</span>
+                    ))}
+                </>
+            )
+        );
+    };
+
+    return (
+        <>
+            <Header />
+            <DictionnarySearchForm onSubmitFunction={handleSubmit} />
+            <Typography tagName={"h1"}>{error || ""}</Typography>
+            {meanings && generateMeanings(meanings)}
+            {data && generateSourceURL(data)}
+        </>
+    );
+};
 
 export default App;
