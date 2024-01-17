@@ -1,18 +1,20 @@
 import { useState, FormEvent } from "react";
 
 // IMPORT TYPES
-import { DictionnaryAPIResponse, ErrorData, Meaning, Phonetic } from "./types/dictionnary-api";
+import { DictionaryAPIResponse, ErrorData, Meaning } from "./types/dictionary-api";
 
 // IMPORT COMPONENTS
 import Typography from "./components/Typography";
-import DictionnarySearchForm from "./components/DictionnarySearchForm";
-import DictionnaryWordType from "./components/DictionnaryWordType";
+import DictionnarySearchForm from "./components/DictionarySearchForm";
+import DictionaryWordHeading from "./components/DictionaryWordHeading";
+import DictionaryWordDefinitions from "./components/DictionaryWordDefinitions";
 
 // IMPORT LAYOUTS
-import Header from "./layouts/HeaderLayout";
+import PageHeader from "./layouts/PageHeaderLayout";
+import WordTitleLayout from "./layouts/WordTitleLayout";
 
 const App = () => {
-    const [successData, setSuccessData] = useState<DictionnaryAPIResponse[] | null>(null);
+    const [successData, setSuccessData] = useState<DictionaryAPIResponse[] | null>(null);
     const [errorData, setErrorData] = useState<ErrorData | null>(null);
     const [hasError, setHasError] = useState<boolean>(false);
     const meanings: Meaning[] = successData && successData[0].meanings;
@@ -39,40 +41,7 @@ const App = () => {
                 });
     };
 
-    const generateWordHeading = () => {
-        
-        return (
-            <header>
-                {successData[0].word}
-                {successData[0].phonetic}
-
-                <div className="audio-container">
-                    <audio src={successData[0].phonetics[0].audio} className=""></audio>
-                    <button className="play-button">▶️</button>
-                </div>
-            </header>
-        )
-    }
-
-    const generateMeanings = (meanings: Meaning[]) => {
-        return meanings?.map(({ partOfSpeech, definitions, synonyms }, i) => {
-            return (
-                <section key={i}>
-                    <DictionnaryWordType wordType={partOfSpeech} />
-                    <p>Meaning</p>
-                    <ul>
-                        {definitions.map(({ definition }, j) => {
-                            return <li key={j}>{definition}</li>;
-                        })}
-                    </ul>
-                    <span>Synonyms&nbsp;&nbsp;</span>
-                    <span>{synonyms.map(synonym => synonym + ", ")}</span>
-                </section>
-            );
-        });
-    };
-
-    const generateSourceURL = (data: DictionnaryAPIResponse[]) => {
+    const generateSourceURL = (data: DictionaryAPIResponse[]) => {
         return (
             <>
                 <hr />
@@ -84,10 +53,12 @@ const App = () => {
         );
     };
 
-    const generateErrorMessage = () => {
+    const generateErrorMessage = (errorData: ErrorData) => {
         return (
             <>
-                <Typography tagName={"p"} className="">😕</Typography>
+                <Typography tagName={"p"} className="">
+                    😕
+                </Typography>
                 <Typography tagName={"h1"} className="">
                     {errorData.title}
                 </Typography>
@@ -100,11 +71,15 @@ const App = () => {
 
     return (
         <>
-            <Header />
+            <PageHeader />
             <DictionnarySearchForm onSubmitFunction={handleSubmit} />
-            {hasError && generateErrorMessage()}
-            {!hasError && successData && generateWordHeading()}
-            {!hasError && successData && generateMeanings(meanings)}
+            {hasError && generateErrorMessage(errorData)}
+            {/* {!hasError && successData && 
+                <WordTitleLayout>
+                    <DictionaryWordHeading data={successData} />
+                </WordTitleLayout>
+            } */}
+            {!hasError && successData && <DictionaryWordDefinitions meanings={meanings} />}
             {!hasError && successData && generateSourceURL(successData)}
         </>
     );

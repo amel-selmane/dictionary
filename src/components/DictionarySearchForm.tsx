@@ -1,6 +1,6 @@
 import React from "react";
 
-function DictionnarySearchForm({ onSubmitFunction }) {
+function DictionarySearchForm({ onSubmitFunction }) {
     return (
         <form onSubmit={onSubmitFunction} className="flex relative">
             <input
@@ -15,4 +15,4 @@ function DictionnarySearchForm({ onSubmitFunction }) {
     );
 }
 
-export default DictionnarySearchForm;
+export default DictionarySearchForm;

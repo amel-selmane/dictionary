@@ -4,7 +4,7 @@ type Props = {
     wordType: string;
 }
 
-function DictionnaryWordType(props: Props) {
+function DictionaryWordType(props: Props) {
     return (
         <div className="flex items-center gap-x-8">
             <h2 className="text-light-black">{props.wordType}</h2>
@@ -13,4 +13,4 @@ function DictionnaryWordType(props: Props) {
     );
 }
 
-export default DictionnaryWordType;
+export default DictionaryWordType;

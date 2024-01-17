@@ -24,13 +24,13 @@ export type Meaning = {
   synonyms: string[];
 };
 
-export type DictionnaryAPIResponse = {
+export type DictionaryAPIResponse = {
   license: License;
   meanings: Meaning[];
   phonetics: Phonetic[];
   sourceUrls: string[];
   word: string;
-  phonetic: string;
+  phonetic?: string;
 };
 
 export type ErrorData = {
