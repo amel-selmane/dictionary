@@ -30,4 +30,11 @@ export type DictionnaryAPIResponse = {
   phonetics: Phonetic[];
   sourceUrls: string[];
   word: string;
+  phonetic: string;
 };
+
+export type ErrorData = {
+  title: string;
+  message: string;
+  resolution: string;
+}

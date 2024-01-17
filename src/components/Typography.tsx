@@ -1,6 +1,15 @@
-import React from "react";
-import { TypographyProps } from "../types/typography";
+import React, { ReactNode } from "react";
 
-const Typography = (props: TypographyProps) => <props.tagName>{props.children}</props.tagName>;
+type TypographyProps = {
+    tagName: keyof JSX.IntrinsicElements;
+    className: string;
+    children: string | JSX.Element | ReactNode;
+}
+
+const Typography = (props: TypographyProps) => (
+    <props.tagName className={props.className || null}>
+        {props.children}
+    </props.tagName>
+);
 
 export default Typography;

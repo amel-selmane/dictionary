@@ -3,5 +3,11 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
+}
+
+@layer components {
+  #root {
+    @apply max-w-3xl m-auto;
+  }
 }

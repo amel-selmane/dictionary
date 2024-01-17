@@ -1,18 +1,21 @@
 import { useState, FormEvent } from "react";
-import { DictionnaryAPIResponse, Meaning, Definition } from "./types/dictionnary-api";
+
+// IMPORT TYPES
+import { DictionnaryAPIResponse, ErrorData, Meaning, Phonetic } from "./types/dictionnary-api";
 
 // IMPORT COMPONENTS
 import Typography from "./components/Typography";
 import DictionnarySearchForm from "./components/DictionnarySearchForm";
-import WordClass from "./components/WordClass";
+import DictionnaryWordType from "./components/DictionnaryWordType";
 
 // IMPORT LAYOUTS
-import Header from "./layouts/Header/Layout";
+import Header from "./layouts/HeaderLayout";
 
 const App = () => {
-    const [data, setData] = useState<DictionnaryAPIResponse[] | null>(null);
-    const [error, setError] = useState<string>(null);
-    const meanings: Meaning[] = data && data[0].meanings;
+    const [successData, setSuccessData] = useState<DictionnaryAPIResponse[] | null>(null);
+    const [errorData, setErrorData] = useState<ErrorData | null>(null);
+    const [hasError, setHasError] = useState<boolean>(false);
+    const meanings: Meaning[] = successData && successData[0].meanings;
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
@@ -23,25 +26,39 @@ const App = () => {
         dictionnaryInputValue &&
             fetch(url)
                 .then(response => {
-                    if (response.ok === false) throw "This word doesn't exists";
                     return response.json();
                 })
                 .then(data => {
-                    setData(data);
-                    setError(null);
-                })
-                .catch(e => {
-                    setError(e);
-                    setData(null);
+                    // (⚠️API functionnality⚠️)
+                    // If the title property exists on data => 404 Error
+                    const error = data.title !== undefined;
+
+                    setHasError(error);
+                    setSuccessData(error ? null : data);
+                    setErrorData(error ? data : null);
                 });
     };
+
+    const generateWordHeading = () => {
+        
+        return (
+            <header>
+                {successData[0].word}
+                {successData[0].phonetic}
+
+                <div className="audio-container">
+                    <audio src={successData[0].phonetics[0].audio} className=""></audio>
+                    <button className="play-button">▶️</button>
+                </div>
+            </header>
+        )
+    }
 
     const generateMeanings = (meanings: Meaning[]) => {
         return meanings?.map(({ partOfSpeech, definitions, synonyms }, i) => {
             return (
                 <section key={i}>
-                    {/* <h2>{props.partOfSpeech}</h2> */}
-                    <WordClass class={partOfSpeech} />
+                    <DictionnaryWordType wordType={partOfSpeech} />
                     <p>Meaning</p>
                     <ul>
                         {definitions.map(({ definition }, j) => {
@@ -57,15 +74,27 @@ const App = () => {
 
     const generateSourceURL = (data: DictionnaryAPIResponse[]) => {
         return (
-            data && (
-                <>
-                    <hr />
-                    <span>Source : </span>
-                    {data.map(({ sourceUrls }, i: number) => (
-                        <span key={i}>{sourceUrls}</span>
-                    ))}
-                </>
-            )
+            <>
+                <hr />
+                <span>Source : </span>
+                {data.map(({ sourceUrls }, i: number) => (
+                    <span key={i}>{sourceUrls}</span>
+                ))}
+            </>
+        );
+    };
+
+    const generateErrorMessage = () => {
+        return (
+            <>
+                <Typography tagName={"p"} className="">😕</Typography>
+                <Typography tagName={"h1"} className="">
+                    {errorData.title}
+                </Typography>
+                <Typography tagName={"p"} className="">
+                    {errorData.message + " " + errorData.resolution}
+                </Typography>
+            </>
         );
     };
 
@@ -73,9 +102,10 @@ const App = () => {
         <>
             <Header />
             <DictionnarySearchForm onSubmitFunction={handleSubmit} />
-            <Typography tagName={"h1"}>{error || ""}</Typography>
-            {meanings && generateMeanings(meanings)}
-            {data && generateSourceURL(data)}
+            {hasError && generateErrorMessage()}
+            {!hasError && successData && generateWordHeading()}
+            {!hasError && successData && generateMeanings(meanings)}
+            {!hasError && successData && generateSourceURL(successData)}
         </>
     );
 };
