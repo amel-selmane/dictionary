@@ -10,6 +10,6 @@
 
 @layer components {
   #root {
-    @apply max-w-3xl m-auto;
+    @apply max-w-3xl m-auto px-6 mb-20 desktop:p-0;
   }
 }

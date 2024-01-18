@@ -1,17 +1,24 @@
-import { useState, FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 
 // IMPORT TYPES
 import { DictionaryAPIResponse, ErrorData, Meaning } from "./types/dictionary-api";
 
 // IMPORT COMPONENTS
-import Typography from "./components/Typography";
-import DictionnarySearchForm from "./components/DictionarySearchForm";
-import DictionaryWordHeading from "./components/DictionaryWordHeading";
-import DictionaryWordDefinitions from "./components/DictionaryWordDefinitions";
+import SearchForm from "./components/SearchForm";
+import WordHeading from "./components/WordHeading";
+import WordDefinition from "./components/WordDefinition";
+import ErrorMessage from "./components/ErrorMessage";
+import WordType from "./components/WordType";
+import SourceUrl from "./components/SourceUrl";
+import WordSynonym from "./components/WordSynonym";
 
 // IMPORT LAYOUTS
 import PageHeader from "./layouts/PageHeaderLayout";
-import WordTitleLayout from "./layouts/WordTitleLayout";
+import WordHeadingLayout from "./layouts/WordHeadingLayout";
+import WordTypeLayout from "./layouts/WordTypeLayout";
+import WordDefinitionsLayout from "./layouts/WordDefinitionsLayout";
+import WordSynonymsLayout from "./layouts/WordSynonymsLayout";
+import WordBlockLayout from "./layouts/WordBlockLayout";
 
 const App = () => {
     const [successData, setSuccessData] = useState<DictionaryAPIResponse[] | null>(null);
@@ -32,7 +39,7 @@ const App = () => {
                 })
                 .then(data => {
                     // (⚠️API functionnality⚠️)
-                    // If the title property exists on data => 404 Error
+                    // If the title property exists on data = 404 Error
                     const error = data.title !== undefined;
 
                     setHasError(error);
@@ -41,46 +48,51 @@ const App = () => {
                 });
     };
 
-    const generateSourceURL = (data: DictionaryAPIResponse[]) => {
-        return (
-            <>
-                <hr />
-                <span>Source : </span>
-                {data.map(({ sourceUrls }, i: number) => (
-                    <span key={i}>{sourceUrls}</span>
-                ))}
-            </>
-        );
-    };
-
-    const generateErrorMessage = (errorData: ErrorData) => {
-        return (
-            <>
-                <Typography tagName={"p"} className="">
-                    😕
-                </Typography>
-                <Typography tagName={"h1"} className="">
-                    {errorData.title}
-                </Typography>
-                <Typography tagName={"p"} className="">
-                    {errorData.message + " " + errorData.resolution}
-                </Typography>
-            </>
-        );
-    };
-
     return (
         <>
             <PageHeader />
-            <DictionnarySearchForm onSubmitFunction={handleSubmit} />
-            {hasError && generateErrorMessage(errorData)}
-            {/* {!hasError && successData && 
-                <WordTitleLayout>
-                    <DictionaryWordHeading data={successData} />
-                </WordTitleLayout>
-            } */}
-            {!hasError && successData && <DictionaryWordDefinitions meanings={meanings} />}
-            {!hasError && successData && generateSourceURL(successData)}
+            <SearchForm onSubmitFunction={handleSubmit} />
+            {hasError && <ErrorMessage errorData={errorData} />}
+
+            {!hasError && successData && (
+                <WordHeadingLayout className="mt-9">
+                    <WordHeading data={successData} />
+                </WordHeadingLayout>
+            )}
+
+            {!hasError &&
+                successData &&
+                meanings.map((meaning, i) => {
+                    const { partOfSpeech, definitions, synonyms } = meaning;
+
+                    return (
+                        <WordBlockLayout key={i} className="mt-10">
+                            <WordTypeLayout>
+                                {/* Noun, Verb, etc. */}
+                                <WordType wordType={partOfSpeech} />
+                            </WordTypeLayout>
+
+                            <WordDefinitionsLayout>
+                                {definitions.map((definition, j) => (
+                                    <WordDefinition 
+                                        key={j} 
+                                        definition={definition.definition} 
+                                        className="flex flex-row items-center gap-x-5 mt-3 first:mt-0" 
+                                    />
+                                ))}
+                            </WordDefinitionsLayout>
+                            {/* <WordSynonymsLayout>
+                                {
+                                    synonyms.map((synonym, j) => (
+                                        return <WordSynonym synonym={synonyms} />
+                                    ))
+                                }
+                            </WordSynonymsLayout> */}
+                        </WordBlockLayout>
+                    );
+                })}
+
+            {!hasError && successData && <SourceUrl data={successData} className="mt-10" />}
         </>
     );
 };

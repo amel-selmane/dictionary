@@ -1,8 +1,8 @@
 import React from "react";
 
-function DictionarySearchForm({ onSubmitFunction }) {
+function SearchForm({ onSubmitFunction }) {
     return (
-        <form onSubmit={onSubmitFunction} className="flex relative">
+        <form onSubmit={onSubmitFunction} className="flex relative mt-[3.2rem]">
             <input
                 type="text"
                 placeholder="Search for any word…"
@@ -15,4 +15,4 @@ function DictionarySearchForm({ onSubmitFunction }) {
     );
 }
 
-export default DictionarySearchForm;
+export default SearchForm;

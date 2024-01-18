@@ -2,17 +2,13 @@ import React, { ReactNode } from "react";
 
 type Props = {
     children: JSX.Element | ReactNode;
-    className?: string
-}
+    className?: string;
+};
 
 function Layout(props: Props) {
     const { children, className } = props;
-    
-    return (
-        <section className={className}>
-            { children }
-        </section>
-    );
+
+    return <div className={className}>{children}</div>;
 }
 
 export default Layout;

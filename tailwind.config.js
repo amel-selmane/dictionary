@@ -12,7 +12,7 @@ export default {
         "midlight-black": "#2D2D2D",
         "dark-grey": "#3A3A3A",
         "mid-grey": "#757575",
-        "lidlight-grey": "#E9E9E9",
+        "midlight-grey": "#E9E9E9",
         "light-grey": "#F4F4F4",
         "custom-purple": "#A445ED",
         "custom-red": "#FF5252"
