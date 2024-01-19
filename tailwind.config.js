@@ -19,7 +19,7 @@ export default {
       },
       screens: {
 				// => @media (min-width: 736px) { ... }
-				desktop: "736px",
+				desktop: "740px",
 			},
     },
   },

@@ -32,7 +32,7 @@ const App = () => {
         const dictionnaryInputValue = e.target[0].value;
         const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${dictionnaryInputValue}`;
 
-        dictionnaryInputValue &&
+        dictionnaryInputValue ?
             fetch(url)
                 .then(response => {
                     return response.json();
@@ -40,19 +40,25 @@ const App = () => {
                 .then(data => {
                     // (⚠️API functionnality⚠️)
                     // If the title property exists on data = 404 Error
-                    const error = data.title !== undefined;
+                    const error = data?.title !== undefined;
 
                     setHasError(error);
                     setSuccessData(error ? null : data);
                     setErrorData(error ? data : null);
-                });
+                })
+        :
+            
+            setHasError(false);
+            setSuccessData(null);
+            setErrorData(null);
+            
     };
 
     return (
         <>
             <PageHeader />
             <SearchForm onSubmitFunction={handleSubmit} />
-            {hasError && <ErrorMessage errorData={errorData} />}
+            {hasError && errorData && <ErrorMessage errorData={errorData} />}
 
             {!hasError && successData && (
                 <WordHeadingLayout className="mt-9">

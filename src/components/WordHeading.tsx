@@ -17,7 +17,7 @@ const WordHeading = (props: { data: DictionaryAPIResponse[] }) => {
             </div>
 
             <div>
-                <audio src={data[0].phonetics[0].audio} className=""></audio>
+                <audio src={data[0].phonetics[0]?.audio} className=""></audio>
                 <button className="play-button">▶️</button>
             </div>
         </>
