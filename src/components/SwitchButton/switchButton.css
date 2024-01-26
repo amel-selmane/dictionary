@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    #check-button:checked + .check-button {
+        @apply bg-custom-purple before:translate-x-[-145%] [&:before]:bg-white;
+    }
+}

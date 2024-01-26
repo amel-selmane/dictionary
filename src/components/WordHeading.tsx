@@ -1,6 +1,7 @@
 import React from "react";
 import { DictionaryAPIResponse } from "../types/dictionary-api";
 import Typography from "./Typography";
+import PlayButton from "./PlayButton";
 
 const WordHeading = (props: { data: DictionaryAPIResponse[] }) => {
     const { data } = props;
@@ -16,10 +17,7 @@ const WordHeading = (props: { data: DictionaryAPIResponse[] }) => {
                 </Typography>
             </div>
 
-            <div>
-                <audio src={data[0].phonetics[0]?.audio} className=""></audio>
-                <button className="play-button">▶️</button>
-            </div>
+            <PlayButton data={data} />
         </>
     );
 };

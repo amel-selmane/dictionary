@@ -17,6 +17,9 @@ export default {
         "custom-purple": "#A445ED",
         "custom-red": "#FF5252"
       },
+      boxShadow: {
+        'window': '0 5px 30px 0px rgba(0, 0, 0, 0.1)',
+      },
       screens: {
 				// => @media (min-width: 736px) { ... }
 				desktop: "740px",
