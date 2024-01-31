@@ -1,37 +1,88 @@
-import React, { useRef } from "react";
+import React, { useRef, MouseEvent, useEffect } from "react";
 import "./windowSelect.css";
 
 type WindowSelectProps = {
     className?: string;
+    setFontName: (name: string) => void;
+    setIsOpen: (isOpen: boolean) => void;
 };
 
-function WindowSelect(props: WindowSelectProps) {
-    const { className } = props;
-    const listButton = useRef<HTMLUListElement>(null);
+const fonts = [
+    {
+        name: "Sans Serif",
+        fontFamilyValue: "Inter, sans-serif",
+        // twConfigValue: "sans",
+    },
+    {
+        name: "Serif",
+        fontFamilyValue: "Lora, serif",
+        // twConfigValue: "serif",
+    },
+    {
+        name: "Mono",
+        fontFamilyValue: "Inconsolata, monospace",
+        // twConfigValue: "mono",
+    },
+];
 
-    console.log(listButton?.current?.querySelectorAll('li button'));
+function WindowSelect(props: WindowSelectProps) {
+    const { className, setFontName, setIsOpen } = props;
+    const ulElement = useRef<HTMLUListElement>(null);
+
+    useEffect(() => {
+        const handleClickEvent = (e: Event) => {
+            const target = e.target as HTMLElement;
+            const windowSelect = ulElement.current;
+            const windowOpenButton = windowSelect?.previousElementSibling;
+
+            const isWindowClicked = windowSelect?.contains(target);
+            const isWindowOpenButtonClicked = windowOpenButton?.contains(target);
+
+            if (!isWindowClicked && !isWindowOpenButtonClicked) setIsOpen(false);
+        };
+
+        window.addEventListener("mousedown", handleClickEvent);
+
+        return () => {
+            window.removeEventListener("mousedown", handleClickEvent);
+        };
+    }, [setIsOpen]);
+
+    const handleClick = (e: MouseEvent, name: string, fontFamilyValue: string): void => {
+        const targetButtonElement = e.target as HTMLButtonElement;
+
+        // Clean all active classes
+        ulElement.current.querySelectorAll("button").forEach(button => button.classList.remove("active"));
+
+        // Add active class and change font-family
+        targetButtonElement.classList.add("active");
+        document.body.style.fontFamily = `var(--${fontFamilyValue})`;
+
+        // Pass font name to parent
+        setFontName(name);
+    };
 
     return (
         <ul
             id="window-select"
-            ref={listButton}
             className={`w-[183px] p-6 bg-white rounded-2xl shadow-window text-midlight-black font-bold z-10 ${className}`}
+            ref={ulElement}
         >
-            <li className="mb-4">
-                <button type="button" className="active hover:text-custom-purple">
-                    Sans Serif
-                </button>
-            </li>
-            <li className="mb-4">
-                <button type="button" className="hover:text-custom-purple">
-                    Serif
-                </button>
-            </li>
-            <li>
-                <button type="button" className="hover:text-custom-purple">
-                    Mono
-                </button>
-            </li>
+            {fonts.map((font, i) => {
+                const { name, fontFamilyValue } = font;
+
+                return (
+                    <li key={name} className={`mb-4 last:mb-0`} style={{ fontFamily: fontFamilyValue }}>
+                        <button
+                            type="button"
+                            className={`hover:text-custom-purple${i === 0 ? " active" : ""}`}
+                            onClick={e => handleClick(e, name, fontFamilyValue)}
+                        >
+                            {font.name}
+                        </button>
+                    </li>
+                );
+            })}
         </ul>
     );
 }

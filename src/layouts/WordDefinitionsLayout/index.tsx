@@ -10,7 +10,7 @@ function Layout(props: Props) {
     return (
         <>
             <p className="mb-6 mt-10 text-mid-grey">Meaning</p>
-            <ul>
+            <ul className="pl-11">
                 { children }
             </ul>
         </>

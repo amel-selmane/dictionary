@@ -4,7 +4,7 @@ import React, { useState, FormEvent } from "react";
 import { DictionaryAPIResponse, ErrorData, Meaning } from "./types/dictionary-api";
 
 // CUSTOM HOOKS
-// import UseDictionaryFetch from "./custom-hooks/UseDictionaryFetch";
+// import useDictionaryFetch from "./custom-hooks/useDictionaryFetch";
 
 // COMPONENTS
 import SearchForm from "./components/SearchForm";
@@ -30,7 +30,7 @@ const App = () => {
     const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
     // const [searchInputValue, setSearchInputValue] = useState<string>("");
     const meanings: Meaning[] = successData && successData[0].meanings;
-    // const data = UseDictionaryFetch(searchInputValue);
+    // const data = useDictionaryFetch(searchInputValue);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
@@ -110,7 +110,7 @@ const App = () => {
                                     <WordDefinition
                                         key={j}
                                         definition={definition.definition}
-                                        className="flex flex-row items-center gap-x-5 mt-3 first:mt-0"
+                                        className="mt-3 first:mt-0 pl-5"
                                     />
                                 ))}
                             </WordDefinitionsLayout>

@@ -2,14 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: 'Inter', sans-serif;
-  /* font-family: 'Inconsolata', monospace;
-  font-family: 'Lora', serif; */
-}
 
 @layer components {
   #root {
     @apply max-w-3xl m-auto px-6 mb-20 desktop:p-0;
+  }
+}
+
+@layer base {
+  :root {
+    --sans: 'Inter', sans-serif;
+    --serif: 'Lora', serif;
+    --mono: 'Inconsolata', monospace;
+    font-family: 'Inter', sans-serif;
   }
 }

@@ -1,7 +1,7 @@
 import React from "react";
-import "./switchButton.css";
+import "./switchInput.css";
 
-function SwitchButton() {
+function SwitchInput() {
     return (
         <>
             <input type="checkbox" id="check-button" className="hidden" title="Toggle dark theme" />
@@ -13,4 +13,4 @@ function SwitchButton() {
     );
 }
 
-export default SwitchButton;
+export default SwitchInput;

@@ -1,8 +1,8 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import DictionaryIcon from "../svg-components/DictionaryIcon";
 import MoonIcon from "../svg-components/MoonIcon";
 import BottomArrowIcon from "../svg-components/BottomArrowIcon";
-import SwitchButton from "../SwitchButton";
+import SwitchInput from "../SwitchInput";
 import WindowSelect from "../WindowSelect";
 import "./navbar.css";
 
@@ -12,28 +12,33 @@ type NavbarProps = {
 
 function Navbar(props: NavbarProps) {
     const { className } = props;
-    const [visible, setVisible] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [fontName, setFontName] = useState("Sans Serif");
 
     return (
         <nav className={`flex justify-between items-center select-none ${className}`}>
-            <span>
-                <DictionaryIcon />
-            </span>
-            <div className="flex gap-x-[26px] text-midlight-grey">
+            <DictionaryIcon />
+            <div className="flex items-center gap-x-[26px] text-midlight-grey">
                 <div className="relative">
                     <button
                         type="button"
                         title="Select your font"
-                        className="flex items-center gap-x-[18px] font-bold text-midlight-black"
-                        onClick={() => setVisible(!visible)}
+                        className="flex items-center gap-x-[18px] font-bold text-midlight-black h-6"
+                        onClick={() => {
+                            setIsOpen(!isOpen);
+                        }}
                     >
-                        <span>Sans Serif</span> <BottomArrowIcon />
+                        <span className="font-name pointer-events-none">{fontName}</span>
+                        <BottomArrowIcon className={"pointer-events-none"} />
                     </button>
-                    <WindowSelect className={`${visible ? "" : "hidden"} absolute right-0 top-[calc(100% + 18px)]`} />
+                    <WindowSelect
+                        className={`absolute right-0${isOpen ? "" : " hidden"}`}
+                        setFontName={setFontName}
+                        setIsOpen={setIsOpen}
+                    />
                 </div>
-                |
-                <div className="flex items-center">
-                    <SwitchButton />
+                <div className="flex items-center before:content-[''] before:block before:w-px before:bg-midlight-grey before:h-[32px] before:mr-6">
+                    <SwitchInput />
                     <MoonIcon light />
                 </div>
             </div>
