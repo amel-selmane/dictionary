@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import DictionaryIcon from "../svg-components/DictionaryIcon";
 import MoonIcon from "../svg-components/MoonIcon";
 import BottomArrowIcon from "../svg-components/BottomArrowIcon";

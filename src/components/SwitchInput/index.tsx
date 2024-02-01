@@ -1,14 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./switchInput.css";
 
 function SwitchInput() {
-    const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
-    useEffect(() => {
-        document.body.classList.add("dark:bg-black");
-        isDarkMode ? document.documentElement.classList.add("dark") : document.documentElement.classList.remove("dark");
-    }, [isDarkMode]);
-
     return (
         <>
             <input
@@ -16,7 +9,7 @@ function SwitchInput() {
                 id="check-button"
                 className="hidden"
                 title="Toggle dark theme"
-                onChange={() => setIsDarkMode(!isDarkMode)}
+                onChange={() => document.documentElement.classList.toggle("dark")}
             />
             <label
                 htmlFor="check-button"

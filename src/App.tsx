@@ -1,5 +1,4 @@
-import React, { useState, FormEvent, useEffect, useContext } from "react";
-import { DarkModeContext } from "./contexts/darkModeContext";
+import React, { useState, FormEvent } from "react";
 
 // TYPES
 import { DictionaryAPIResponse, ErrorData, Meaning } from "./types/dictionary-api";
@@ -31,7 +30,6 @@ const App = () => {
     const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
     const meanings: Meaning[] = successData && successData[0].meanings;
     // const data = useDictionaryFetch(searchInputValue);
-    const [darkMode] = useContext(DarkModeContext);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
