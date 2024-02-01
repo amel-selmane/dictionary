@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import DictionaryIcon from "../svg-components/DictionaryIcon";
 import MoonIcon from "../svg-components/MoonIcon";
 import BottomArrowIcon from "../svg-components/BottomArrowIcon";
@@ -23,7 +23,7 @@ function Navbar(props: NavbarProps) {
                     <button
                         type="button"
                         title="Select your font"
-                        className="flex items-center gap-x-[18px] font-bold text-midlight-black h-6"
+                        className="flex items-center gap-x-[18px] h-6 font-bold text-midlight-black dark:text-white"
                         onClick={() => {
                             setIsOpen(!isOpen);
                         }}
@@ -39,7 +39,7 @@ function Navbar(props: NavbarProps) {
                 </div>
                 <div className="flex items-center before:content-[''] before:block before:w-px before:bg-midlight-grey before:h-[32px] before:mr-6">
                     <SwitchInput />
-                    <MoonIcon light />
+                    <MoonIcon />
                 </div>
             </div>
         </nav>

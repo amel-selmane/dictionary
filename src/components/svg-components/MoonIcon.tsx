@@ -1,20 +1,15 @@
 import React from "react";
 
-type MoonIconProps = {
-    light: boolean;
-};
-
-function MoonIcon(props: MoonIconProps) {
-    const { light } = props;
-
+function MoonIcon() {
     return (
         <svg
-            fill={light ? "#000000" : "#A445ED"}
+            fill="#000000"
             height="20px"
             width="50px"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 49.739 49.739"
+            className="dark:fill-custom-purple"
         >
             <path
                 d="M25.068,48.889c-9.173,0-18.017-5.06-22.396-13.804C-3.373,23.008,1.164,8.467,13.003,1.979l2.061-1.129l-0.615,2.268

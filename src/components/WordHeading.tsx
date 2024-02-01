@@ -9,7 +9,7 @@ const WordHeading = (props: { data: DictionaryAPIResponse[] }) => {
     return (
         <>
             <div className="flex flex-col gap-y-2">
-                <Typography tagName="h1" className="text-[64px] font-bold leading-none color-midlight-black">
+                <Typography tagName="h1" className="text-[64px] font-bold leading-none text-midlight-black dark:text-white">
                     <dfn>{data[0].word}</dfn>
                 </Typography>
                 <Typography tagName="span" className="text-custom-purple">

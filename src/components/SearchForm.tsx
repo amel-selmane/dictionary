@@ -7,9 +7,8 @@ function SearchForm({ onSubmitFunction, isInputEmpty = false }) {
                 <input
                     type="text"
                     placeholder="Search for any word…"
-                    className={`w-full bg-light-grey rounded-2xl h-16 text-xl text-midlight-black font-bold py-5 px-6 border-2 outline-2 placeholder:text-midlight-black placeholder:opacity-25 ${
-                        isInputEmpty ? "border-custom-red outline-custom-red" : "outline-custom-purple"
-                    } transition-all duration-300`}
+                    className={`w-full bg-light-grey dark:bg-dark-black rounded-2xl h-16 text-xl text-midlight-black dark:text-white font-bold py-5 px-6 outline-none outline-offset-0 outline-2 outline placeholder:text-midlight-black dark:placeholder:text-white placeholder:opacity-25 dark:placeholder:opacity-100 
+                    ${isInputEmpty && "border-custom-red outline-custom-red"}`}
                     aria-invalid={isInputEmpty || null}
                     aria-describedby={isInputEmpty ? "error-message" : null}
                 />

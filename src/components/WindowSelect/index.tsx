@@ -65,7 +65,7 @@ function WindowSelect(props: WindowSelectProps) {
     return (
         <ul
             id="window-select"
-            className={`w-[183px] p-6 bg-white rounded-2xl shadow-window text-midlight-black font-bold z-10 ${className}`}
+            className={`w-[183px] p-6 bg-white dark:bg-dark-black rounded-2xl shadow-window text-midlight-black dark:text-white font-bold z-10 ${className}`}
             ref={ulElement}
         >
             {fonts.map((font, i) => {

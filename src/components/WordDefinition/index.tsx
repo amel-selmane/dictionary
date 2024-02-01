@@ -9,7 +9,7 @@ type Props = {
 const WordDefinition = (props: Props) => {
     const { definition, className } = props;
 
-    return <li className={`word-definition ${className}`}>{definition}</li>;
+    return <li className={`word-definition text-midlight-black dark:text-white ${className}`}>{definition}</li>;
 };
 
 export default WordDefinition;
