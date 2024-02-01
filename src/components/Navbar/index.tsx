@@ -23,7 +23,7 @@ function Navbar(props: NavbarProps) {
                     <button
                         type="button"
                         title="Select your font"
-                        className="flex h-6 items-center gap-x-[18px] font-bold text-midlight-black dark:text-white"
+                        className="flex h-6 items-center gap-x-[18px] text-sm font-bold text-midlight-black dark:text-white desktop:text-lg"
                         onClick={() => {
                             setIsOpen(!isOpen);
                         }}
@@ -34,7 +34,7 @@ function Navbar(props: NavbarProps) {
                     <WindowSelect
                         className={`absolute right-0${isOpen ? "" : " hidden"}`}
                         setFontName={setFontName}
-                        setIsOpen={setIsOpen}
+                        setIsOpen={() => {}}
                     />
                 </div>
                 <div className="flex items-center before:mr-6 before:block before:h-[32px] before:w-px before:bg-midlight-grey before:content-['']">

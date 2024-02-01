@@ -20,7 +20,7 @@ function PlayButton(props: PlayButtonProps) {
                 className="play-button active:scale-95 active:transition-transform active:duration-100"
                 onClick={() => (audioPlayer.current as HTMLAudioElement).play()}
             >
-                <PlayButtonIcon />
+                <PlayButtonIcon svgClassName={"size-12 desktop:size-[75px]"} />
             </button>
         </div>
     ;

@@ -87,7 +87,7 @@ const App = () => {
             {hasError && errorData && <ErrorMessage errorData={errorData} />}
 
             {!hasError && successData && (
-                <WordHeadingLayout className="mt-9">
+                <WordHeadingLayout className="mt-6 desktop:mt-9">
                     <WordHeading data={successData} />
                 </WordHeadingLayout>
             )}
@@ -98,7 +98,7 @@ const App = () => {
                     const { partOfSpeech, definitions, synonyms } = meaning;
 
                     return (
-                        <WordMainContentLayout key={i} className="mt-10">
+                        <WordMainContentLayout key={i} className="mt-7 desktop:mt-10">
                             <WordTypeLayout>
                                 {/* Noun, Verb, etc. */}
                                 <WordType wordType={partOfSpeech} />
@@ -109,7 +109,7 @@ const App = () => {
                                     <WordDefinition
                                         key={j}
                                         definition={definition.definition}
-                                        className="mt-3 pl-5 first:mt-0"
+                                        className="mt-3 pl-5 text-[15px] first:mt-0 desktop:text-lg"
                                     />
                                 ))}
                             </WordDefinitionsLayout>
@@ -124,7 +124,7 @@ const App = () => {
                     );
                 })}
 
-            {!hasError && successData && <SourceUrl data={successData} className="mt-10" />}
+            {!hasError && successData && <SourceUrl data={successData} className="mt-8 desktop:mt-10" />}
         </>
     );
 };
