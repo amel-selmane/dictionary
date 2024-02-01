@@ -3,7 +3,8 @@ import "./windowSelect.css";
 
 type WindowSelectProps = {
     className?: string;
-    setFontName: () => void;
+    // eslint-disable-next-line no-unused-vars
+    setFontName: (fontName: string) => void;
     setIsOpen: () => void;
 };
 
@@ -30,22 +31,20 @@ function WindowSelect(props: WindowSelectProps) {
     const ulElement = useRef<HTMLUListElement>(null);
 
     useEffect(() => {
-        const handleClickEvent = (e: Event) => {
-            const target = e.target as HTMLElement;
+        const closingClickEvent = (mouseEvent: Event) => {
+            const target = mouseEvent.target as HTMLElement;
             const windowSelect = ulElement.current;
             const windowOpenButton = windowSelect?.previousElementSibling;
 
             const isWindowClicked = windowSelect?.contains(target);
             const isWindowOpenButtonClicked = windowOpenButton?.contains(target);
 
-            if (!isWindowClicked && !isWindowOpenButtonClicked) setIsOpen(false);
+            if (!isWindowClicked && !isWindowOpenButtonClicked) setIsOpen();
         };
 
-        window.addEventListener("mousedown", handleClickEvent);
+        window.addEventListener("mousedown", closingClickEvent);
 
-        return () => {
-            window.removeEventListener("mousedown", handleClickEvent);
-        };
+        return () => window.removeEventListener("mousedown", closingClickEvent);
     }, [setIsOpen]);
 
     const handleClick = (e: MouseEvent, name: string, fontFamilyValue: string): void => {
@@ -65,7 +64,7 @@ function WindowSelect(props: WindowSelectProps) {
     return (
         <ul
             id="window-select"
-            className={`z-10 w-[183px] rounded-2xl bg-white p-6 font-bold text-midlight-black shadow-window dark:bg-dark-black dark:text-white ${className}`}
+            className={`z-10 w-[183px] rounded-2xl bg-white p-6 font-bold text-midlight-black shadow-window dark:bg-dark-black dark:text-white dark:shadow-darkWindow ${className}`}
             ref={ulElement}
         >
             {fonts.map((font, i) => {
@@ -76,9 +75,9 @@ function WindowSelect(props: WindowSelectProps) {
                         <button
                             type="button"
                             className={`hover:text-custom-purple${i === 0 ? " active" : ""}`}
-                            onClick={e => handleClick(e, name, fontFamilyValue)}
+                            onClick={clickEvent => handleClick(clickEvent, name, fontFamilyValue)}
                         >
-                            {font.name}
+                            {name}
                         </button>
                     </li>
                 );

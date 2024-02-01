@@ -16,6 +16,7 @@ export default {
             },
             boxShadow: {
                 window: "0 5px 30px 0px rgba(0, 0, 0, 0.1)",
+                darkWindow: "0px 5px 30px 0px #A445ED"
             },
             screens: {
                 // => @media (min-width: 736px) { ... }
