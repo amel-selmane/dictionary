@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .play-button svg circle, .play-button svg path {
+        @apply transition-all duration-200;
+    }
+
+    .play-button:hover svg circle {
+        @apply fill-custom-purple opacity-100;
+    }
+
+    .play-button:hover svg path {
+        @apply fill-white opacity-100;
+    }
+}

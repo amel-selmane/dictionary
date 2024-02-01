@@ -13,7 +13,7 @@ function SwitchInput() {
             />
             <label
                 htmlFor="check-button"
-                className="check-button w-[40px] h-5 bg-mid-grey cursor-pointer rounded-[10px] relative select-none before:content-[''] before:absolute before:right-[7%] before:top-2/4 before:translate-y-[-50%]  before:w-[14px] before:h-[14px] before:rounded-3xl before:bg-white [&:before]:transition-transform [&:before]:duration-100"
+                className="check-button relative h-5 w-[40px] cursor-pointer select-none rounded-[10px] bg-mid-grey before:absolute before:right-[7%] before:top-2/4 before:size-[14px] before:translate-y-[-50%]  before:rounded-3xl before:bg-white before:content-[''] [&:before]:transition-transform [&:before]:duration-100"
             ></label>
         </>
     );

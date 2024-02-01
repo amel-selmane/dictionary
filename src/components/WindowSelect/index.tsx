@@ -3,8 +3,8 @@ import "./windowSelect.css";
 
 type WindowSelectProps = {
     className?: string;
-    setFontName: (name: string) => void;
-    setIsOpen: (isOpen: boolean) => void;
+    setFontName: () => void;
+    setIsOpen: () => void;
 };
 
 const fonts = [
@@ -65,7 +65,7 @@ function WindowSelect(props: WindowSelectProps) {
     return (
         <ul
             id="window-select"
-            className={`w-[183px] p-6 bg-white dark:bg-dark-black rounded-2xl shadow-window text-midlight-black dark:text-white font-bold z-10 ${className}`}
+            className={`z-10 w-[183px] rounded-2xl bg-white p-6 font-bold text-midlight-black shadow-window dark:bg-dark-black dark:text-white ${className}`}
             ref={ulElement}
         >
             {fonts.map((font, i) => {

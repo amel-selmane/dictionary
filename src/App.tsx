@@ -109,7 +109,7 @@ const App = () => {
                                     <WordDefinition
                                         key={j}
                                         definition={definition.definition}
-                                        className="mt-3 first:mt-0 pl-5"
+                                        className="mt-3 pl-5 first:mt-0"
                                     />
                                 ))}
                             </WordDefinitionsLayout>

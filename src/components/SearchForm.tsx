@@ -7,8 +7,8 @@ function SearchForm({ onSubmitFunction, isInputEmpty = false }) {
                 <input
                     type="text"
                     placeholder="Search for any word…"
-                    className={`w-full bg-light-grey dark:bg-dark-black rounded-2xl h-16 text-xl text-midlight-black dark:text-white font-bold py-5 px-6 outline-none outline-offset-0 outline-2 outline placeholder:text-midlight-black dark:placeholder:text-white placeholder:opacity-25 dark:placeholder:opacity-100 
-                    ${isInputEmpty && "border-custom-red outline-custom-red"}`}
+                    className={`h-16 w-full rounded-2xl bg-light-grey px-6 py-5 text-xl font-bold text-midlight-black  placeholder:text-midlight-black placeholder:opacity-25 focus:outline-custom-purple dark:bg-dark-black dark:text-white dark:placeholder:text-white dark:placeholder:opacity-100
+                    ${isInputEmpty ? " outline outline-2 outline-custom-red focus:outline-custom-red" : " outline-custom-purple"}`}
                     aria-invalid={isInputEmpty || null}
                     aria-describedby={isInputEmpty ? "error-message" : null}
                 />
@@ -22,7 +22,7 @@ function SearchForm({ onSubmitFunction, isInputEmpty = false }) {
                 </button>
             </div>
             {isInputEmpty && (
-                <span className="error-message block mt-2 text-custom-red" role="alert">
+                <span className="error-message mt-2 block text-custom-red" role="alert">
                     Whoops, can’t be empty…
                 </span>
             )}

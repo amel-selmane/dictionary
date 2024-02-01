@@ -16,14 +16,14 @@ function Navbar(props: NavbarProps) {
     const [fontName, setFontName] = useState("Sans Serif");
 
     return (
-        <nav className={`flex justify-between items-center select-none ${className}`}>
+        <nav className={`flex select-none items-center justify-between ${className}`}>
             <DictionaryIcon />
             <div className="flex items-center gap-x-[26px] text-midlight-grey">
                 <div className="relative">
                     <button
                         type="button"
                         title="Select your font"
-                        className="flex items-center gap-x-[18px] h-6 font-bold text-midlight-black dark:text-white"
+                        className="flex h-6 items-center gap-x-[18px] font-bold text-midlight-black dark:text-white"
                         onClick={() => {
                             setIsOpen(!isOpen);
                         }}
@@ -37,7 +37,7 @@ function Navbar(props: NavbarProps) {
                         setIsOpen={setIsOpen}
                     />
                 </div>
-                <div className="flex items-center before:content-[''] before:block before:w-px before:bg-midlight-grey before:h-[32px] before:mr-6">
+                <div className="flex items-center before:mr-6 before:block before:h-[32px] before:w-px before:bg-midlight-grey before:content-['']">
                     <SwitchInput />
                     <MoonIcon />
                 </div>

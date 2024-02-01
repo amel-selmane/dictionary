@@ -8,7 +8,7 @@ type Props = {
 function Layout(props: Props) {
     const { children, className } = props;
 
-    return <header className={`flex justify-between items-center ${className}`}>{children}</header>;
+    return <header className={`flex items-center justify-between ${className}`}>{children}</header>;
 }
 
 export default Layout;

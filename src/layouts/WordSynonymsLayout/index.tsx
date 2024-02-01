@@ -11,7 +11,7 @@ function Layout(props: Props) {
     return (
         <p className={`break-all ${className}`}>
             <span className="mr-6 text-mid-grey">Synonym(s)</span>
-            <span className="text-custom-purple font-bold">{children}</span>
+            <span className="font-bold text-custom-purple">{children}</span>
         </p>
     );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import Typography from "./Typography";
 import { ErrorData } from "../types/dictionary-api";
 
-function ErrorMessage(props: {errorData: ErrorData}) {
+function ErrorMessage(props: { errorData: ErrorData }) {
     const { title, message, resolution } = props.errorData;
 
     return (
@@ -10,10 +10,10 @@ function ErrorMessage(props: {errorData: ErrorData}) {
             <Typography tagName={"p"} className="text-[64px] leading-none">
                 😕
             </Typography>
-            <Typography tagName={"h1"} className="text-midlight-black font-bold text-xl mt-11">
+            <Typography tagName={"h1"} className="mt-11 text-xl font-bold text-midlight-black">
                 {title}
             </Typography>
-            <Typography tagName={"p"} className="text-mid-grey text-lg mt-6">
+            <Typography tagName={"p"} className="mt-6 text-lg text-mid-grey">
                 {message + " " + resolution}
             </Typography>
         </div>
