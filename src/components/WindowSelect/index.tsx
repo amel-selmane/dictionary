@@ -23,8 +23,10 @@ function WindowSelect(props: WindowSelectProps) {
             const isWindowClicked = fontsListWindow?.contains(target);
             const isWindowOpenButtonClicked = fontsListWindowOpenButton?.contains(target);
 
-            (!isWindowClicked && !isWindowOpenButtonClicked) && 
+            if (!isWindowClicked && !isWindowOpenButtonClicked) {
                 setIsOpen(false);
+                ulElement.current.setAttribute("aria-visible", "false");
+            }
         };
 
         window.addEventListener("mousedown", closingClickEvent);
@@ -38,7 +40,7 @@ function WindowSelect(props: WindowSelectProps) {
 
     const handleClickWindowButtons = (e: MouseEvent, name: string, fontFamilyCSSVariable: string) => {
         const targetButtonElement = e.target as HTMLButtonElement;
-        
+
         // Clean all active classes
         elementsRefs.current.forEach(button => button.classList.remove("active"));
 

@@ -1,7 +1,4 @@
-import React, { useState, useRef, MouseEventHandler, FormEventHandler, useEffect } from "react";
-
-// TYPES
-import { Meaning } from "./types/dictionary-api";
+import { useState, useRef, MouseEventHandler, FormEventHandler, useEffect } from "react";
 
 // CUSTOM HOOKS
 import UseDictionaryFetch from "./custom-hooks/UseDictionaryFetch";
@@ -22,37 +19,33 @@ import WordHeadingLayout from "./layouts/WordHeadingLayout";
 const App = () => {
     const [dictionaryWord, setDictionaryWord] = useState<string>("");
     const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
+    const mainTitleRef = useRef<HTMLHeadingElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const { successData, errorData, hasError } = UseDictionaryFetch(dictionaryWord);
-    const meanings: Meaning[] = successData && successData[0].meanings;
-    const mainTitleRef = useRef(null);
 
-    const handleSubmit: FormEventHandler<HTMLFormElement> = onSubmitEvent => {
+    const handleSubmitForm: FormEventHandler<HTMLFormElement> = onSubmitEvent => {
         onSubmitEvent.preventDefault();
-
-        const submittedValue = onSubmitEvent.target[0].value;
-        onSubmitEvent.target[0].value = null;
+        const submittedValue = inputRef.current.value;
 
         setIsInputEmpty(submittedValue === "");
-        // submittedValue === "" ? onSubmitEvent.target[0].focus() : ;
-
         setDictionaryWord(submittedValue);
     };
 
     const handleClickSynonym: MouseEventHandler<HTMLButtonElement> = clickEvent => {
-        const synonym = clickEvent.target as HTMLButtonElement;
-        setDictionaryWord(synonym.textContent);
-        window.scrollTo(0, 0);
+        const synonym = (clickEvent.target as HTMLButtonElement).textContent;
+
+        setDictionaryWord(synonym);
+        inputRef.current.value = synonym;
     };
 
     useEffect(() => {
-        const h1WordElement = mainTitleRef.current;
-        h1WordElement?.focus();
-    }, [successData])
+        mainTitleRef.current?.focus();
+    }, [successData]);
 
     return (
         <>
             <Navbar className="mt-[58px]" />
-            <SearchForm onSubmitFunction={handleSubmit} isInputEmpty={isInputEmpty} />
+            <SearchForm onSubmitFunction={handleSubmitForm} isInputEmpty={isInputEmpty} ref={inputRef} />
 
             {/* IF WORD DOESN'T EXISTS */}
             {hasError && errorData && <ErrorMessage errorData={errorData} />}
@@ -64,7 +57,7 @@ const App = () => {
                         <WordHeading data={successData} ref={mainTitleRef} />
                     </WordHeadingLayout>
 
-                    {meanings?.map(({ partOfSpeech, definitions, synonyms }, i) => (
+                    {successData[0]?.meanings?.map(({ partOfSpeech, definitions, synonyms }, i) => (
                         <section key={i} className="mt-7 desktop:mt-10">
                             <WordType wordType={partOfSpeech} />
                             <DefinitionsBlock definitions={definitions} />

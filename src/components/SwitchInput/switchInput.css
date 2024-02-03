@@ -4,6 +4,6 @@
 
 @layer components {
     #check-button:checked + .check-button {
-        @apply bg-custom-purple before:translate-x-[-140%] [&:before]:bg-white;
+        @apply bg-custom-purple before:translate-x-[140%] [&:before]:bg-white;
     }
 }
