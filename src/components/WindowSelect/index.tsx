@@ -23,7 +23,8 @@ function WindowSelect(props: WindowSelectProps) {
             const isWindowClicked = fontsListWindow?.contains(target);
             const isWindowOpenButtonClicked = fontsListWindowOpenButton?.contains(target);
 
-            if (!isWindowClicked && !isWindowOpenButtonClicked) setIsOpen(false);
+            (!isWindowClicked && !isWindowOpenButtonClicked) && 
+                setIsOpen(false);
         };
 
         window.addEventListener("mousedown", closingClickEvent);
@@ -35,7 +36,7 @@ function WindowSelect(props: WindowSelectProps) {
         };
     }, [setIsOpen]);
 
-    const handleClick = (e: MouseEvent, name: string, fontFamilyValue: string) => {
+    const handleClickWindowButtons = (e: MouseEvent, name: string, fontFamilyCSSVariable: string) => {
         const targetButtonElement = e.target as HTMLButtonElement;
         
         // Clean all active classes
@@ -43,7 +44,7 @@ function WindowSelect(props: WindowSelectProps) {
 
         // Add active class and change font-family
         targetButtonElement.classList.add("active");
-        document.body.style.fontFamily = fontFamilyValue;
+        document.body.style.fontFamily = `var(--${fontFamilyCSSVariable})`;
 
         // Pass font name to parent
         setFontName(name);
@@ -55,12 +56,13 @@ function WindowSelect(props: WindowSelectProps) {
             className={`z-10 w-[183px] rounded-2xl bg-white p-6 text-sm font-bold text-midlight-black shadow-window dark:bg-dark-black dark:text-white dark:shadow-darkWindow desktop:text-lg ${className}`}
             ref={ulElement}
         >
-            {fonts.map(({ name, fontFamilyValue }, index) => (
-                <li key={name} className={`mb-4 last:mb-0`} style={{ fontFamily: fontFamilyValue }}>
+            {fonts.map(({ name, fontFamilyCSSVariable }, index) => (
+                <li key={name} className={`mb-4 last:mb-0`}>
                     <button
                         type="button"
                         className={`hover:text-custom-purple${index === 0 ? " active" : ""}`}
-                        onClick={clickEvent => handleClick(clickEvent, name, fontFamilyValue)}
+                        style={{ fontFamily: `var(--${fontFamilyCSSVariable})` }}
+                        onClick={clickEvent => handleClickWindowButtons(clickEvent, name, fontFamilyCSSVariable)}
                         ref={el => (elementsRefs.current[index] = el)}
                     >
                         {name}

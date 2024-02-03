@@ -1,23 +1,19 @@
 type FontFamily = {
     name: string;
-    fontFamilyValue: string;
-    // twConfigValue: string;
+    fontFamilyCSSVariable: string;
 };
 
 export const fonts: FontFamily[] = [
     {
         name: "Sans Serif",
-        fontFamilyValue: "Inter, sans-serif",
-        // twConfigValue: "sans",
+        fontFamilyCSSVariable: "inter",
     },
     {
         name: "Serif",
-        fontFamilyValue: "Lora, serif",
-        // twConfigValue: "serif",
+        fontFamilyCSSVariable: "lora",
     },
     {
         name: "Mono",
-        fontFamilyValue: "Inconsolata, monospace",
-        // twConfigValue: "mono",
+        fontFamilyCSSVariable: "inconsolata",
     },
 ];

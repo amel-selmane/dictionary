@@ -2,6 +2,11 @@
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
+        fontFamily: {
+            inter: ["Inter", "sans-serif"],
+            lora: ["Lora", "serif"],
+            inconsolata: ["Inconsolata", "monospace"],
+        },
         extend: {
             colors: {
                 "custom-black": "#050505",
@@ -23,12 +28,7 @@ export default {
             screens: {
                 // => @media (min-width: 736px) { ... }
                 desktop: "740px",
-            },
-            fontFamily: {
-                inter: "Inter, sans-serif",
-                lora: "Lora, serif",
-                inconsolata: "Inconsolata, monospace",
-            },
+            }
         },
     },
     darkMode: 'class',
