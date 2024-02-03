@@ -9,11 +9,11 @@ function SearchForm({ onSubmitFunction, isInputEmpty = false }) {
                 <input
                     type="text"
                     placeholder="Search for any word…"
-                    className={`h-12 w-full rounded-2xl bg-light-grey px-6 py-5 text-base font-bold text-midlight-black transition-all duration-300 placeholder:text-midlight-black placeholder:opacity-25 focus:outline-custom-purple dark:bg-dark-black dark:text-white dark:placeholder:text-white dark:placeholder:opacity-100 desktop:h-16 desktop:text-xl
+                    className={`h-12 w-full rounded-2xl bg-light-grey px-6 py-5 text-base font-bold text-midlight-black transition-all duration-300 placeholder:text-midlight-black placeholder:opacity-25 focus:scale-[100.5%] focus:outline-double focus:outline-2 dark:bg-dark-black dark:text-white dark:placeholder:text-white dark:placeholder:opacity-100 desktop:h-16 desktop:text-xl
                     ${
                         isInputEmpty
-                            ? " outline outline-2 outline-custom-red focus:outline-custom-red"
-                            : " outline-custom-purple"
+                            ? " outline outline-2 outline-custom-red duration-0 focus:shadow-erroredInput focus:outline-custom-red"
+                            : " outline-custom-purple focus:shadow-selectedInput focus:outline-custom-purple"
                     }`}
                     aria-invalid={isInputEmpty || null}
                     aria-describedby={isInputEmpty ? "error-message" : null}

@@ -1,13 +1,6 @@
-import React, { ReactNode } from "react";
+import React, { PropsWithChildren } from "react";
 
-type Props = {
-    children: JSX.Element | ReactNode;
-    className: string;
-};
-
-function Layout(props: Props) {
-    const { children, className } = props;
-
+function Layout({ children, className }: PropsWithChildren<{ className: string }>) {
     return <header className={`flex items-center justify-between ${className}`}>{children}</header>;
 }
 

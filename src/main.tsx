@@ -3,12 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
-import { DarkModeProvider } from "./contexts/darkModeContext";
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <DarkModeProvider>
-            <App />
-        </DarkModeProvider>
+        <App />
     </React.StrictMode>,
 );

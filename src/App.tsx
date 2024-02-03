@@ -1,130 +1,83 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, useRef, MouseEventHandler, FormEventHandler, useEffect } from "react";
 
 // TYPES
-import { DictionaryAPIResponse, ErrorData, Meaning } from "./types/dictionary-api";
+import { Meaning } from "./types/dictionary-api";
 
 // CUSTOM HOOKS
-// import useDictionaryFetch from "./custom-hooks/useDictionaryFetch";
+import UseDictionaryFetch from "./custom-hooks/UseDictionaryFetch";
 
 // COMPONENTS
 import SearchForm from "./components/SearchForm";
 import WordHeading from "./components/WordHeading";
-import WordDefinition from "./components/WordDefinition";
+import DefinitionsBlock from "./components/DefinitionsBlock";
 import ErrorMessage from "./components/ErrorMessage";
 import WordType from "./components/WordType";
-import WordSynonym from "./components/WordSynonym";
+import SynonymsBlock from "./components/SynonymsBlock";
 import SourceUrl from "./components/SourceUrl";
 import Navbar from "./components/Navbar";
 
 // LAYOUTS
 import WordHeadingLayout from "./layouts/WordHeadingLayout";
-import WordTypeLayout from "./layouts/WordTypeLayout";
-import WordDefinitionsLayout from "./layouts/WordDefinitionsLayout";
-import WordSynonymsLayout from "./layouts/WordSynonymsLayout";
-import WordMainContentLayout from "./layouts/WordMainContentLayout";
 
 const App = () => {
-    const [successData, setSuccessData] = useState<DictionaryAPIResponse[] | null>(null);
-    const [errorData, setErrorData] = useState<ErrorData | null>(null);
-    const [hasError, setHasError] = useState<boolean>(false);
+    const [dictionaryWord, setDictionaryWord] = useState<string>("");
     const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
+    const { successData, errorData, hasError } = UseDictionaryFetch(dictionaryWord);
     const meanings: Meaning[] = successData && successData[0].meanings;
-    // const data = useDictionaryFetch(searchInputValue);
+    const mainTitleRef = useRef(null);
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
-        e.preventDefault();
+    const handleSubmit: FormEventHandler<HTMLFormElement> = onSubmitEvent => {
+        onSubmitEvent.preventDefault();
 
-        // setSearchInputValue(e.target[0].value);
+        const submittedValue = onSubmitEvent.target[0].value;
+        onSubmitEvent.target[0].value = null;
 
-        // if (searchInputValue) {
-        //     console.log("EHRER")
-        //     // (⚠️API functionnality⚠️)
-        //     // This API doesn't returns an error when the word doesn't exist, it also returns data
-        //     // Data with "title" property is an error
-        //     const error = data?.title !== undefined;
+        setIsInputEmpty(submittedValue === "");
+        // submittedValue === "" ? onSubmitEvent.target[0].focus() : ;
 
-        //     setHasError(error);
-        //     setSuccessData(error ? null : data);
-        //     setErrorData(error ? data : null);
-        // } else {
-        //     console.log("ELSE");
-        //     setIsInputEmpty(searchInputValue === "");
-        //     setHasError(false);
-        //     setSuccessData(null);
-        //     setErrorData(null);
-        // }
-
-        const dictionnaryInputValue = e.target[0].value;
-        const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${dictionnaryInputValue}`;
-        setIsInputEmpty(dictionnaryInputValue === "");
-
-        dictionnaryInputValue
-            ? fetch(url)
-                  .then(response => {
-                      return response.json();
-                  })
-                  .then(data => {
-                      // (⚠️API functionnality⚠️)
-                      // This API doesn't returns an error when the word doesn't exist, it also returns data
-                      // Data with "title" property is an error
-                      const error = data?.title !== undefined;
-
-                      setHasError(error);
-                      setSuccessData(error ? null : data);
-                      setErrorData(error ? data : null);
-                  })
-            : setHasError(false);
-        setSuccessData(null);
-        setErrorData(null);
+        setDictionaryWord(submittedValue);
     };
+
+    const handleClickSynonym: MouseEventHandler<HTMLButtonElement> = clickEvent => {
+        const synonym = clickEvent.target as HTMLButtonElement;
+        setDictionaryWord(synonym.textContent);
+        window.scrollTo(0, 0);
+    };
+
+    useEffect(() => {
+        const h1WordElement = mainTitleRef.current;
+        h1WordElement?.focus();
+    }, [successData])
 
     return (
         <>
             <Navbar className="mt-[58px]" />
-
             <SearchForm onSubmitFunction={handleSubmit} isInputEmpty={isInputEmpty} />
 
+            {/* IF WORD DOESN'T EXISTS */}
             {hasError && errorData && <ErrorMessage errorData={errorData} />}
 
-            {!hasError && successData && (
-                <WordHeadingLayout className="mt-6 desktop:mt-9">
-                    <WordHeading data={successData} />
-                </WordHeadingLayout>
+            {/* IF WORD EXISTS */}
+            {!hasError && !isInputEmpty && successData && (
+                <>
+                    <WordHeadingLayout className="mt-6 desktop:mt-9">
+                        <WordHeading data={successData} ref={mainTitleRef} />
+                    </WordHeadingLayout>
+
+                    {meanings?.map(({ partOfSpeech, definitions, synonyms }, i) => (
+                        <section key={i} className="mt-7 desktop:mt-10">
+                            <WordType wordType={partOfSpeech} />
+                            <DefinitionsBlock definitions={definitions} />
+                            <SynonymsBlock
+                                onClick={handleClickSynonym}
+                                synonyms={synonyms}
+                                className="mt-6 desktop:mt-10"
+                            />
+                        </section>
+                    ))}
+                    <SourceUrl data={successData} className="mt-8 desktop:mt-10" />
+                </>
             )}
-
-            {!hasError &&
-                successData &&
-                meanings.map((meaning, i) => {
-                    const { partOfSpeech, definitions, synonyms } = meaning;
-
-                    return (
-                        <WordMainContentLayout key={i} className="mt-7 desktop:mt-10">
-                            <WordTypeLayout>
-                                {/* Noun, Verb, etc. */}
-                                <WordType wordType={partOfSpeech} />
-                            </WordTypeLayout>
-
-                            <WordDefinitionsLayout>
-                                {definitions.map((definition, j) => (
-                                    <WordDefinition
-                                        key={j}
-                                        definition={definition.definition}
-                                        className="mt-3 pl-5 text-[15px] first:mt-0 desktop:text-lg"
-                                    />
-                                ))}
-                            </WordDefinitionsLayout>
-                            {synonyms.length !== 0 && (
-                                <WordSynonymsLayout className="mt-16">
-                                    {synonyms.map((synonym, j) => {
-                                        return <WordSynonym key={j} synonym={synonym} />;
-                                    })}
-                                </WordSynonymsLayout>
-                            )}
-                        </WordMainContentLayout>
-                    );
-                })}
-
-            {!hasError && successData && <SourceUrl data={successData} className="mt-8 desktop:mt-10" />}
         </>
     );
 };

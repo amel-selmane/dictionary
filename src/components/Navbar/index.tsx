@@ -6,35 +6,33 @@ import SwitchInput from "../SwitchInput";
 import WindowSelect from "../WindowSelect";
 import "./navbar.css";
 
-type NavbarProps = {
-    className?: string;
-};
-
-function Navbar(props: NavbarProps) {
-    const { className } = props;
-    const [isOpen, setIsOpen] = useState(false);
-    const [fontName, setFontName] = useState("Sans Serif");
+function Navbar({ className }: { className?: string }) {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [fontName, setFontName] = useState<string>("Sans Serif");
 
     return (
         <nav className={`flex select-none items-center justify-between ${className}`}>
-            <DictionaryIcon />
+            <h1>
+                <span className="sr-only">Dictionary application"</span>
+                <DictionaryIcon />
+            </h1>
             <div className="flex items-center gap-x-[26px] text-midlight-grey">
                 <div className="relative">
                     <button
                         type="button"
                         title="Select your font"
                         className="flex h-6 items-center gap-x-[18px] text-sm font-bold text-midlight-black dark:text-white desktop:text-lg"
-                        onClick={() => {
-                            setIsOpen(!isOpen);
-                        }}
+                        onClick={() => setIsOpen(!isOpen)}
                     >
                         <span className="font-name pointer-events-none">{fontName}</span>
                         <BottomArrowIcon className={"pointer-events-none"} />
                     </button>
                     <WindowSelect
-                        className={`absolute right-0${isOpen ? "" : " hidden"}`}
+                        className={`absolute right-0 transition-all duration-200${
+                            isOpen ? " translate-y-0 opacity-100" : " pointer-events-none translate-y-[-30px] opacity-0"
+                        }`}
                         setFontName={setFontName}
-                        setIsOpen={() => {}}
+                        setIsOpen={setIsOpen}
                     />
                 </div>
                 <div className="flex items-center before:mr-6 before:block before:h-[32px] before:w-px before:bg-midlight-grey before:content-['']">

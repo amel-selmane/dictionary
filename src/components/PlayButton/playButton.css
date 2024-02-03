@@ -7,11 +7,11 @@
         @apply transition-all duration-200;
     }
 
-    .play-button:hover svg circle {
+    .play-button:hover svg circle, .play-button:focus-within svg circle {
         @apply fill-custom-purple opacity-100;
     }
 
-    .play-button:hover svg path {
+    .play-button:hover svg path, .play-button:focus-within svg path {
         @apply fill-white opacity-100;
     }
 }

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   #root {
     @apply max-w-3xl m-auto px-6 mb-20 desktop:p-0;
@@ -14,6 +13,8 @@
     --sans: 'Inter', sans-serif;
     --serif: 'Lora', serif;
     --mono: 'Inconsolata', monospace;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--sans);
+    
+    @apply scroll-smooth;
   }
 }
