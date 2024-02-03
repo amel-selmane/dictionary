@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     environment:
+      # Name of the deployment environment configured on github settings repository
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
