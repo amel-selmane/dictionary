@@ -2,12 +2,12 @@
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
-        fontFamily: {
-            inter: ["Inter", "sans-serif"],
-            lora: ["Lora", "serif"],
-            inconsolata: ["Inconsolata", "monospace"],
-        },
         extend: {
+            fontFamily: {
+                inter: ["Inter", "sans-serif"],
+                lora: ["Lora", "serif"],
+                inconsolata: ["Inconsolata", "monospace"],
+            },
             colors: {
                 "custom-black": "#050505",
                 "dark-black": "#1F1F1F",

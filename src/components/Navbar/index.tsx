@@ -14,7 +14,9 @@ function Navbar({ className }: { className?: string }) {
         <nav className={`flex select-none items-center justify-between ${className}`}>
             <h1>
                 <span className="sr-only">Dictionary application"</span>
-                <DictionaryIcon />
+                <a href="/" title="Main page Dictionary logo">
+                    <DictionaryIcon />
+                </a>
             </h1>
             <div className="flex items-center gap-x-[26px] text-midlight-grey">
                 <div className="relative">
@@ -28,11 +30,12 @@ function Navbar({ className }: { className?: string }) {
                         <BottomArrowIcon className={"pointer-events-none"} />
                     </button>
                     <WindowSelect
-                        className={`absolute right-0 transition-all duration-200${
-                            isOpen ? " translate-y-0 opacity-100" : " pointer-events-none translate-y-[-30px] opacity-0"
+                        className={`absolute right-0 transition-all duration-200 ${
+                            isOpen ? "visible translate-y-0 opacity-100" : "visibility-hidden pointer-events-none translate-y-[-30px] opacity-0"
                         }`}
                         setFontName={setFontName}
                         setIsOpen={setIsOpen}
+                        isWindowOpen={isOpen}
                     />
                 </div>
                 <div className="flex items-center before:mr-6 before:block before:h-[32px] before:w-px before:bg-midlight-grey before:content-['']">

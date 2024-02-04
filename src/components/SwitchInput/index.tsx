@@ -1,10 +1,12 @@
-import React, { KeyboardEventHandler } from "react";
+import React, { KeyboardEventHandler, useRef } from "react";
 import "./switchInput.css";
 
 function SwitchInput() {
+    const checkbox = useRef<HTMLInputElement>(null);
+
     const handleKeydown: KeyboardEventHandler<HTMLLabelElement> = keyboardEvent => {
         if (keyboardEvent.key === "Enter" || keyboardEvent.key === " ") {
-            document.getElementById("check-button")?.click();
+            checkbox.current?.click();
         }
     };
 
@@ -16,6 +18,7 @@ function SwitchInput() {
                 className="hidden"
                 title="Toggle dark theme"
                 onChange={() => document.documentElement.classList.toggle("dark")}
+                ref={checkbox}
             />
             <label
                 htmlFor="check-button"
