@@ -1,5 +1,5 @@
 # English Dictionary application
-**See the project** : amel-selmane.github.io/dictionnary/
+**See the project** : [amel-selmane.github.io/dictionary/](https://amel-selmane.github.io/dictionary/)
 
 ## How it works
 
