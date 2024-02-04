@@ -14,7 +14,7 @@ function Navbar({ className }: { className?: string }) {
         <nav className={`flex select-none items-center justify-between ${className}`}>
             <h1>
                 <span className="sr-only">Dictionary application"</span>
-                <a href="/" title="Main page Dictionary logo">
+                <a href="./" title="Main page Dictionary logo">
                     <DictionaryIcon />
                 </a>
             </h1>
