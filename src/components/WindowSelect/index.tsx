@@ -21,12 +21,7 @@ function WindowSelect({ className, setFontName, setIsOpen, isWindowOpen }: Windo
 
             const isWindowClicked = fontsListWindow?.contains(target);
             const isWindowOpenButtonClicked = fontsListWindowOpenButton?.contains(target);
-
-            if (!isWindowClicked && !isWindowOpenButtonClicked) {
-                setIsOpen(false);
-
-                ulElement.current.setAttribute("aria-hidden", "true");
-            } else ulElement.current.removeAttribute("aria-hidden");
+            if (!isWindowClicked && !isWindowOpenButtonClicked) setIsOpen(false);
         };
 
         window.addEventListener("mousedown", closingClickEvent);
@@ -60,7 +55,7 @@ function WindowSelect({ className, setFontName, setIsOpen, isWindowOpen }: Windo
             id="window-select"
             className={`z-10 w-[183px] rounded-2xl bg-white p-6 text-sm font-bold text-midlight-black shadow-window dark:bg-dark-black dark:text-white dark:shadow-darkWindow desktop:text-lg ${className}`}
             ref={ulElement}
-            aria-hidden="true"
+            aria-hidden={isWindowOpen ? null : "true"}
         >
             {fonts.map(({ name, fontFamilyCSSVariable }, index) => (
                 <li key={name} className={`mb-4 last:mb-0`}>

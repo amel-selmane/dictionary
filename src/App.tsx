@@ -1,7 +1,7 @@
 import { useState, useRef, MouseEventHandler, FormEventHandler, useEffect } from "react";
 
 // CUSTOM HOOKS
-import UseDictionaryFetch from "./custom-hooks/UseDictionaryFetch";
+import useDictionaryFetch from "./custom-hooks/useDictionaryFetch";
 
 // COMPONENTS
 import SearchForm from "./components/SearchForm";
@@ -21,7 +21,7 @@ const App = () => {
     const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
     const mainTitleRef = useRef<HTMLHeadingElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    const { successData, errorData, hasError } = UseDictionaryFetch(dictionaryWord);
+    const { successData, errorData, hasError } = useDictionaryFetch(dictionaryWord);
 
     const handleSubmitForm: FormEventHandler<HTMLFormElement> = onSubmitEvent => {
         onSubmitEvent.preventDefault();
@@ -45,7 +45,7 @@ const App = () => {
     return (
         <>
             <Navbar className="mt-[58px]" />
-            <SearchForm onSubmitFunction={handleSubmitForm} isInputEmpty={isInputEmpty} ref={inputRef} />
+            <SearchForm onSubmit={handleSubmitForm} isInputEmpty={isInputEmpty} ref={inputRef} />
 
             {/* IF WORD DOESN'T EXISTS */}
             {hasError && errorData && <ErrorMessage errorData={errorData} />}

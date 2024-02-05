@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DictionaryAPIResponse, ErrorData } from "../types/dictionary-api";
 
-function UseDictionaryFetch(dictionaryWord: string) {
+function useDictionaryFetch(dictionaryWord: string) {
     // successData represents the data collected when the word exists
     const [successData, setSuccessData] = useState<DictionaryAPIResponse[] | null>(null);
     // errorData represents the data collected when the word doesn't exist
@@ -30,4 +30,4 @@ function UseDictionaryFetch(dictionaryWord: string) {
     return { successData, errorData, hasError };
 }
 
-export default UseDictionaryFetch;
+export default useDictionaryFetch;

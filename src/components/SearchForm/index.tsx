@@ -3,15 +3,15 @@ import LensIcon from "../svg-components/LensIcon";
 import "./searchForm.css";
 
 type SearchFormProps = {
-    onSubmitFunction: FormEventHandler<HTMLFormElement>,
+    onSubmit: FormEventHandler<HTMLFormElement>,
     isInputEmpty: boolean
 }
 
 const SearchForm = forwardRef((props: SearchFormProps, ref: LegacyRef<HTMLInputElement>) => {
-    const { onSubmitFunction, isInputEmpty } = props;
+    const { onSubmit, isInputEmpty } = props;
 
     return (
-        <form onSubmit={onSubmitFunction} className="mt-[3.2rem]">
+        <form onSubmit={onSubmit} className="mt-[3.2rem]">
             <div className="relative">
                 <input
                     type="text"
