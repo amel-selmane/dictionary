@@ -1,17 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.play-button svg circle,
+.play-button svg path {
+    @apply transition-all duration-200;
+}
 
-@layer components {
-    .play-button svg circle, .play-button svg path {
-        @apply transition-all duration-200;
-    }
+.play-button:hover svg circle,
+.play-button:focus-within svg circle {
+    @apply fill-custom-purple opacity-100;
+}
 
-    .play-button:hover svg circle, .play-button:focus-within svg circle {
-        @apply fill-custom-purple opacity-100;
-    }
-
-    .play-button:hover svg path, .play-button:focus-within svg path {
-        @apply fill-white opacity-100;
-    }
+.play-button:hover svg path,
+.play-button:focus-within svg path {
+    @apply fill-white opacity-100;
 }

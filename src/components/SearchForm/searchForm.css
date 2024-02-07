@@ -1,13 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+#search-button svg {
+    @apply transition-transform duration-100;
+}
 
-@layer components {
-    #search-button svg {
-        @apply transition-transform duration-100;
-    }
-
-    #search-button:active svg {
-        @apply scale-75;
-    }
+#search-button:active svg {
+    @apply scale-75;
 }

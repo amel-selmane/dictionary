@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { DictionaryAPIResponse } from "../../types/dictionary-api";
 import PlayButtonIcon from "../svg-components/PlayButtonIcon";
-import "./playButton.css";
 
 type PlayButtonProps = {
     data: DictionaryAPIResponse[];

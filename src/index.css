@@ -1,3 +1,10 @@
+@import "./components/SwitchInput/switchInput.css";
+@import "./components/Navbar/navbar.css";
+@import "./components/WindowSelect/windowSelect.css";
+@import "./components/DefinitionsBlock/definitionsBlock.css";
+@import "./components/SearchForm/searchForm.css";
+@import "./components/PlayButton/playButton.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

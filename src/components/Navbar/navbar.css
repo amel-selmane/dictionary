@@ -1,9 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-    #window-select {
-        top: calc(100% + 18px);
-    }
+#window-select {
+    top: calc(100% + 18px);
 }

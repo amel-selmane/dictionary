@@ -4,7 +4,6 @@ import MoonIcon from "../svg-components/MoonIcon";
 import BottomArrowIcon from "../svg-components/BottomArrowIcon";
 import SwitchInput from "../SwitchInput";
 import WindowSelect from "../WindowSelect";
-import "./navbar.css";
 
 function Navbar({ className }: { className?: string }) {
     const [isOpen, setIsOpen] = useState<boolean>(false);

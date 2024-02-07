@@ -1,5 +1,4 @@
 import React, { KeyboardEventHandler, useRef } from "react";
-import "./switchInput.css";
 
 function SwitchInput() {
     const checkbox = useRef<HTMLInputElement>(null);

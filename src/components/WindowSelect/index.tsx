@@ -1,5 +1,4 @@
 import React, { useRef, MouseEvent, useEffect, Dispatch, SetStateAction, HTMLAttributes } from "react";
-import "./windowSelect.css";
 import { fonts } from "../../data/fontFamilies";
 
 type WindowSelectProps = {

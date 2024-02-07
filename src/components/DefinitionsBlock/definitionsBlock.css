@@ -1,10 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-    .word-definition {
-        @apply list-image-[url(../../assets/icons/purple-list-disc.svg)];
-    }
+.word-definition {
+    @apply list-image-[url(../../assets/icons/purple-list-disc.svg)];
 }
 

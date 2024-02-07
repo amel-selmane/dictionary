@@ -1,6 +1,5 @@
 import React, { forwardRef, FormEventHandler, LegacyRef } from "react";
 import LensIcon from "../svg-components/LensIcon";
-import "./searchForm.css";
 
 type SearchFormProps = {
     onSubmit: FormEventHandler<HTMLFormElement>,
