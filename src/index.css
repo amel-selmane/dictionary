@@ -3,7 +3,8 @@
 @import "./components/WindowSelect/windowSelect.css";
 @import "./components/DefinitionsBlock/definitionsBlock.css";
 @import "./components/SearchForm/searchForm.css";
-@import "./components/PlayButton/playButton.css";
+@import "./components/Player/player.css";
+@import "./components/SwitchInput/switchInput.css";
 
 @tailwind base;
 @tailwind components;

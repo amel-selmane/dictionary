@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { DictionaryAPIResponse } from "../types/dictionary-api";
-import PlayButton from "./PlayButton";
+import Player from "./Player";
 
 type Props = {
     data: DictionaryAPIResponse[];
@@ -20,7 +20,7 @@ const WordHeading = forwardRef<HTMLHeadingElement, Props>(({ data }, ref) => {
                 <span className="text-lg text-custom-purple desktop:text-2xl">{data[0].phonetic}</span>
             </div>
 
-            <PlayButton data={data} />
+            <Player data={data} />
         </>
     );
 });

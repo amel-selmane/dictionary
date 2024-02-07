@@ -1,4 +1,3 @@
-import React from "react";
 import { ErrorData } from "../types/dictionary-api";
 
 function ErrorMessage(props: { errorData: ErrorData }) {

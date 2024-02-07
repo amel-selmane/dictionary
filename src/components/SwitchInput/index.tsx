@@ -1,4 +1,4 @@
-import React, { KeyboardEventHandler, useRef } from "react";
+import { KeyboardEventHandler, useRef } from "react";
 
 function SwitchInput() {
     const checkbox = useRef<HTMLInputElement>(null);

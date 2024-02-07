@@ -1,6 +1,5 @@
 import React from "react";
 import { Definition } from "../../types/dictionary-api";
-import "./definitionsBlock.css";
 
 type Props = {
     definitions: Definition[];
