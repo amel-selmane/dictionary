@@ -7,9 +7,9 @@ function PlayButton({ onClick }: { onClick: MouseEventHandler<HTMLButtonElement>
             type="button"
             title="Listen to word pronunciation"
             className="play-button active:scale-95 active:transition-transform active:duration-100"
-            onClick={() => onClick}
+            onClick={onClick}
         >
-            <PlayButtonIcon svgClassName={"size-12 desktop:size-[75px] pointer-events-none"} />
+            <PlayButtonIcon svgClassName={"size-12 desktop:size-[75px]"} />
         </button>
     );
 }

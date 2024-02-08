@@ -11,10 +11,10 @@ function Player({ data }: PlayerProps) {
 
     return (
         data[0].phonetics[0]?.audio && (
-            <>
+            <div>
                 <audio src={data[0].phonetics[0]?.audio} ref={audioPlayer}></audio>
                 <PlayButton onClick={() => audioPlayer.current?.play()} />
-            </>
+            </div>
         )
     );
 }

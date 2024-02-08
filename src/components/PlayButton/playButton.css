@@ -4,11 +4,11 @@
 }
 
 .play-button:hover svg circle,
-.play-button:focus-within svg circle {
+.play-button:active svg circle {
     @apply fill-custom-purple opacity-100;
 }
 
 .play-button:hover svg path,
-.play-button:focus-within svg path {
+.play-button:active svg path {
     @apply fill-white opacity-100;
 }

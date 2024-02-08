@@ -10,7 +10,7 @@ type WindowSelectProps = {
 
 function WindowSelect({ className, setFontName, setIsOpen, isWindowOpen }: WindowSelectProps) {
     const ulElement = useRef<HTMLUListElement>(null);
-    const elementsRefs = useRef<HTMLElement[]>([]);
+    const fontButtons = useRef<HTMLElement[]>([]);
 
     useEffect(() => {
         const closingClickEvent = (mouseEvent: Event) => {
@@ -33,20 +33,16 @@ function WindowSelect({ className, setFontName, setIsOpen, isWindowOpen }: Windo
     }, [setIsOpen]);
 
     const handleClickWindowButtons = (e: MouseEvent, name: string, fontFamilyCSSVariable: string) => {
-        const fontsListWindowOpenButton = ulElement.current?.previousElementSibling;
-        const targetButtonElement = e.target as HTMLButtonElement;
+        const cleanButtonsActiveClasses = () => fontButtons.current.forEach(button => button.classList.remove("active"));
+        const addActiveClass = () => (e.target as HTMLButtonElement).classList.add("active");
+        const setFontFamilyToDocument = () => document.body.style.fontFamily = `var(--${fontFamilyCSSVariable})`;
+        const focusOpenButtonAfterSelection = () => (ulElement.current?.previousElementSibling as HTMLButtonElement).focus();
 
-        // Clean all active classes
-        elementsRefs.current.forEach(button => button.classList.remove("active"));
-
-        // Add active class and change font-family
-        targetButtonElement.classList.add("active");
-        document.body.style.fontFamily = `var(--${fontFamilyCSSVariable})`;
-
-        // Pass font name to parent
+        cleanButtonsActiveClasses();
+        addActiveClass();
+        setFontFamilyToDocument();
         setFontName(name);
-
-        (fontsListWindowOpenButton as HTMLButtonElement).focus();
+        focusOpenButtonAfterSelection();
     };
 
     return (
@@ -63,7 +59,7 @@ function WindowSelect({ className, setFontName, setIsOpen, isWindowOpen }: Windo
                         className={`hover:text-custom-purple${index === 0 ? " active" : ""}`}
                         style={{ fontFamily: `var(--${fontFamilyCSSVariable})` }}
                         onClick={clickEvent => handleClickWindowButtons(clickEvent, name, fontFamilyCSSVariable)}
-                        ref={el => (elementsRefs.current[index] = el)}
+                        ref={el => (fontButtons.current[index] = el)}
                         tabIndex={isWindowOpen ? null : -1}
                     >
                         {name}

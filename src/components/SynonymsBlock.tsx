@@ -12,7 +12,7 @@ const SynonymsBlock = ({ synonyms, onClick, className }: SynonymsBlockProps) =>
             <h3 className="text-mid-grey">Synonym(s)&nbsp;:</h3>
             <ul className="font-bold text-custom-purple">
                 {synonyms.map((synonym, index) => (
-                    <React.Fragment key={synonym}>
+                    <React.Fragment key={index}>
                         <li className="inline">
                             <button type="button" onClick={onClick} className="relative after:absolute after:bottom-[2px] after:left-0 after:h-[1.5px] after:w-full after:bg-transparent after:transition-colors after:content-[''] hover:after:bg-custom-purple">
                                 {synonym}

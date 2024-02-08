@@ -2,9 +2,9 @@ import React, { forwardRef, FormEventHandler, LegacyRef } from "react";
 import LensIcon from "../svg-components/LensIcon";
 
 type SearchFormProps = {
-    onSubmit: FormEventHandler<HTMLFormElement>,
-    isInputEmpty: boolean
-}
+    onSubmit: FormEventHandler<HTMLFormElement>;
+    isInputEmpty: boolean;
+};
 
 const SearchForm = forwardRef((props: SearchFormProps, ref: LegacyRef<HTMLInputElement>) => {
     const { onSubmit, isInputEmpty } = props;
@@ -25,7 +25,12 @@ const SearchForm = forwardRef((props: SearchFormProps, ref: LegacyRef<HTMLInputE
                     aria-describedby={isInputEmpty ? "error-message" : null}
                     ref={ref}
                 />
-                <button type="submit" title="Search word" id="search-button" className="absolute right-0 top-1/2 flex h-full w-16 translate-y-[-50%] items-center justify-center">
+                <button
+                    type="submit"
+                    title="Search word"
+                    id="search-button"
+                    className="absolute right-0 top-1/2 flex h-full w-16 translate-y-[-50%] items-center justify-center"
+                >
                     <LensIcon isInputEmpty={isInputEmpty} />
                 </button>
             </div>
