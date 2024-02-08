@@ -10,7 +10,7 @@ type WindowSelectProps = {
 
 function WindowSelect({ className, setFontName, setIsOpen, isWindowOpen }: WindowSelectProps) {
     const ulElement = useRef<HTMLUListElement>(null);
-    const fontButtons = useRef<HTMLElement[]>([]);
+    const fontButtons = useRef<HTMLButtonElement[]>([]);
 
     useEffect(() => {
         const closingClickEvent = (mouseEvent: Event) => {
@@ -36,13 +36,13 @@ function WindowSelect({ className, setFontName, setIsOpen, isWindowOpen }: Windo
         const cleanButtonsActiveClasses = () => fontButtons.current.forEach(button => button.classList.remove("active"));
         const addActiveClass = () => (e.target as HTMLButtonElement).classList.add("active");
         const setFontFamilyToDocument = () => document.body.style.fontFamily = `var(--${fontFamilyCSSVariable})`;
-        const focusOpenButtonAfterSelection = () => (ulElement.current?.previousElementSibling as HTMLButtonElement).focus();
+        const focusOpenButtonAfterFontSelection = () => (ulElement.current?.previousElementSibling as HTMLButtonElement).focus();
 
         cleanButtonsActiveClasses();
         addActiveClass();
         setFontFamilyToDocument();
         setFontName(name);
-        focusOpenButtonAfterSelection();
+        focusOpenButtonAfterFontSelection();
     };
 
     return (
@@ -59,7 +59,7 @@ function WindowSelect({ className, setFontName, setIsOpen, isWindowOpen }: Windo
                         className={`hover:text-custom-purple${index === 0 ? " active" : ""}`}
                         style={{ fontFamily: `var(--${fontFamilyCSSVariable})` }}
                         onClick={clickEvent => handleClickWindowButtons(clickEvent, name, fontFamilyCSSVariable)}
-                        ref={el => (fontButtons.current[index] = el)}
+                        ref={fontButton => (fontButtons.current[index] = fontButton)}
                         tabIndex={isWindowOpen ? null : -1}
                     >
                         {name}
