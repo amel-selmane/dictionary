@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
-import SwitchInput from "../SwitchInput";
+import App from "./App";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-    title: "Atoms/SwitchInput",
-    component: SwitchInput,
+    title: "Molecules/App",
+    component: App,
     parameters: {
         // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
         layout: "centered",
@@ -15,7 +15,7 @@ const meta = {
     argTypes: {
         //   backgroundColor: { control: 'color' },
     },
-} satisfies Meta<typeof SwitchInput>;
+} satisfies Meta<typeof App>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

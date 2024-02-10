@@ -1,20 +1,20 @@
 import { useState, useRef, MouseEventHandler, FormEventHandler, useEffect } from "react";
 
 // CUSTOM HOOKS
-import useDictionaryFetch from "./custom-hooks/useDictionaryFetch";
+import useDictionaryFetch from "../custom-hooks/useDictionaryFetch";
 
 // COMPONENTS
-import SearchForm from "./components/SearchForm";
-import WordHeading from "./components/WordHeading";
-import DefinitionsBlock from "./components/DefinitionsBlock";
-import ErrorMessage from "./components/ErrorMessage";
-import WordType from "./components/WordType";
-import SynonymsBlock from "./components/SynonymsBlock";
-import SourceUrl from "./components/SourceUrl";
-import Navbar from "./components/Navbar";
+import SearchForm from "../components/SearchForm";
+import WordHeading from "../components/WordHeading";
+import DefinitionsBlock from "../components/DefinitionsBlock";
+import ErrorMessage from "../components/ErrorMessage";
+import WordType from "../components/WordType";
+import SynonymsBlock from "../components/SynonymsBlock";
+import SourceUrl from "../components/SourceUrl";
+import Navbar from "../components/Navbar";
 
 // LAYOUTS
-import WordHeadingLayout from "./layouts/WordHeadingLayout";
+import WordHeadingLayout from "../layouts/WordHeadingLayout";
 
 const App = () => {
     const [dictionaryWord, setDictionaryWord] = useState<string>("");
