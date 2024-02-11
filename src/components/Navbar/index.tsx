@@ -1,4 +1,4 @@
-import React, { useState, useRef, forwardRef } from "react";
+import React, { useState, useRef } from "react";
 import DictionaryIcon from "../svg-components/DictionaryIcon";
 import MoonIcon from "../svg-components/MoonIcon";
 import BottomArrowIcon from "../svg-components/BottomArrowIcon";
@@ -6,7 +6,7 @@ import SwitchInput from "../SwitchInput";
 import WindowSelect from "../WindowSelect";
 import useClosingOnClickOutside from "../../custom-hooks/useClosingOnClickOutside";
 
-const Navbar = forwardRef(function Navbar({ className }: { className?: string }, ref) {
+const Navbar = ({ className }: { className?: string }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [fontName, setFontName] = useState<string>("Sans Serif");
     const windowSelectOpenButtonRef = useRef(null);
@@ -54,6 +54,6 @@ const Navbar = forwardRef(function Navbar({ className }: { className?: string },
             </div>
         </nav>
     );
-});
+};
 
 export default Navbar;
